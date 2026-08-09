@@ -28,9 +28,10 @@ function getDbConfig() {
     sslMode === 'VERIFY_CA';
 
   if (useSsl) {
+    const rejectUnauthorized = process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false';
     config.ssl = process.env.DB_CA_CERT
-      ? { ca: process.env.DB_CA_CERT, rejectUnauthorized: true }
-      : { rejectUnauthorized: true };
+      ? { ca: process.env.DB_CA_CERT, rejectUnauthorized }
+      : { rejectUnauthorized };
   } else {
     config.allowPublicKeyRetrieval = true;
   }
