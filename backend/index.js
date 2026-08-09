@@ -12,6 +12,10 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/tasks', taskRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Task Management API is running' });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
